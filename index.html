@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ankan | Rabindrasangeet Artist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Hind+Siliguri:wght@300;400;500&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c97e;
+      --gold-dim: rgba(201,168,76,0.15);
+      --bg: #0a0804;
+      --bg2: #110e07;
+      --bg3: #1a1508;
+      --text: #f0e8d5;
+      --text-dim: rgba(240,232,213,0.55);
+      --border: rgba(201,168,76,0.2);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── Noise grain overlay ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 180px;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.6;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.6rem 4rem;
+      background: linear-gradient(to bottom, rgba(10,8,4,0.95) 0%, transparent 100%);
+    }
+
+    .nav-logo {
+      font-family: 'IM Fell English', serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dim);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-visual {
+      position: relative;
+      background: radial-gradient(ellipse at 60% 40%, #2a1f08 0%, #0a0804 70%);
+    }
+
+    /* Decorative concentric arcs */
+    .hero-visual svg.arcs {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 140%; height: 140%;
+      opacity: 0.18;
+    }
+
+    .hero-visual .portrait-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      box-shadow: 0 0 60px rgba(201,168,76,0.12), inset 0 0 60px rgba(201,168,76,0.06);
+    }
+
+    .hero-visual .portrait-ring::before {
+      content: '';
+      position: absolute; inset: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.35);
+    }
+
+    /* Musical note symbol in center */
+    .hero-visual .center-symbol {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -55%);
+      font-size: 8rem;
+      opacity: 0.12;
+      color: var(--gold);
+      user-select: none;
+      animation: floatSymbol 6s ease-in-out infinite;
+    }
+
+    @keyframes floatSymbol {
+      0%, 100% { transform: translate(-50%, -55%); }
+      50% { transform: translate(-50%, -60%); }
+    }
+
+    .hero-visual .bengali-script {
+      position: absolute;
+      bottom: 12%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Hind Siliguri', sans-serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      opacity: 0.6;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 5rem 5rem 3rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-name {
+      font-family: 'IM Fell English', serif;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      line-height: 0.95;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--gold-light);
+      display: block;
+    }
+
+    .hero-tagline {
+      font-size: 1.3rem;
+      color: var(--text-dim);
+      font-style: italic;
+      margin: 1.5rem 0 3rem;
+      line-height: 1.5;
+      max-width: 380px;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-cta {
+      display: flex; gap: 1.2rem; flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg);
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201,168,76,0.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .btn-outline:hover {
+      background: var(--gold-dim);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      margin-top: 5rem;
+      display: flex; align-items: center; gap: 1rem;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      animation: fadeUp 0.8s 0.6s ease both;
+    }
+
+    .hero-scroll-line {
+      width: 40px; height: 1px;
+      background: var(--border);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      opacity: 0.25;
+      margin: 0;
+    }
+
+    /* ─── SECTION COMMON ─── */
+    section {
+      padding: 7rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'IM Fell English', serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .stat {
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .stat:last-child { border-bottom: none; }
+
+    .stat-number {
+      font-family: 'IM Fell English', serif;
+      font-size: 3.5rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .about-text p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p:first-child {
+      font-size: 1.45rem;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    /* ─── ALBUMS ─── */
+    #albums { background: var(--bg2); max-width: 100%; padding: 7rem 0; }
+    #albums .inner { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+
+    .albums-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .album-card {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      cursor: pointer;
+      group: true;
+    }
+
+    .album-cover {
+      width: 100%; height: 100%;
+      background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.5s ease;
+    }
+
+    .album-card:hover .album-cover { transform: scale(1.03); }
+
+    /* Abstract album art placeholders */
+    .album-cover-1 { background: radial-gradient(ellipse at 30% 30%, #2a1a05 0%, #0d0a03 60%), url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='200' cy='200' r='160' fill='none' stroke='%23c9a84c' stroke-width='0.5' opacity='0.3'/%3E%3Ccircle cx='200' cy='200' r='120' fill='none' stroke='%23c9a84c' stroke-width='0.5' opacity='0.25'/%3E%3Ccircle cx='200' cy='200' r='80' fill='none' stroke='%23c9a84c' stroke-width='0.5' opacity='0.2'/%3E%3Ctext x='200' y='215' text-anchor='middle' font-size='60' fill='%23c9a84c' opacity='0.25' font-family='serif'%3E♫%3C/text%3E%3C/svg%3E"); background-size: cover; }
+    .album-cover-2 { background: radial-gradient(ellipse at 70% 60%, #1a0d22 0%, #0a0804 60%), url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='200' x2='400' y2='200' stroke='%23c9a84c' stroke-width='0.5' opacity='0.2'/%3E%3Cline x1='200' y1='0' x2='200' y2='400' stroke='%23c9a84c' stroke-width='0.5' opacity='0.2'/%3E%3Ccircle cx='200' cy='200' r='140' fill='none' stroke='%23c9a84c' stroke-width='0.5' opacity='0.15'/%3E%3Ctext x='200' y='215' text-anchor='middle' font-size='60' fill='%23c9a84c' opacity='0.2' font-family='serif'%3E𝄞%3C/text%3E%3C/svg%3E"); background-size: cover; }
+    .album-cover-3 { background: radial-gradient(ellipse at 40% 70%, #05180a 0%, #0a0804 60%), url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M200 40 L360 300 L40 300 Z' fill='none' stroke='%23c9a84c' stroke-width='0.5' opacity='0.2'/%3E%3Ccircle cx='200' cy='200' r='100' fill='none' stroke='%23c9a84c' stroke-width='0.5' opacity='0.18'/%3E%3Ctext x='200' y='215' text-anchor='middle' font-size='55' fill='%23c9a84c' opacity='0.2' font-family='serif'%3E♬%3C/text%3E%3C/svg%3E"); background-size: cover; }
+
+    .album-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,8,4,0.92) 0%, transparent 55%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 1.8rem;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .album-card:hover .album-overlay { opacity: 1; }
+
+    .album-info-static {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1.5rem 1.8rem;
+      background: linear-gradient(to top, rgba(10,8,4,0.85) 0%, transparent 100%);
+    }
+
+    .album-year {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 0.3rem;
+    }
+
+    .album-title {
+      font-family: 'IM Fell English', serif;
+      font-size: 1.3rem;
+      color: var(--text);
+    }
+
+    .album-tag {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.2rem 0.7rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* ─── UPCOMING ALBUM TEASER ─── */
+    .new-album {
+      margin-top: 2rem;
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem;
+      background: var(--gold-dim);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .new-album::before {
+      content: 'NEW';
+      position: absolute; top: 1rem; right: 1.5rem;
+      font-size: 0.6rem; letter-spacing: 0.35em;
+      color: var(--gold); opacity: 0.5;
+    }
+
+    .new-album-label {
+      font-size: 0.7rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+    }
+
+    .new-album-title {
+      font-family: 'IM Fell English', serif;
+      font-size: 2rem; font-style: italic;
+    }
+
+    .new-album-desc {
+      color: var(--text-dim);
+      font-size: 1rem; line-height: 1.6;
+      max-width: 400px;
+    }
+
+    /* ─── TEACHING ─── */
+    .teaching-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .teaching-card {
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .teaching-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .teaching-icon {
+      font-size: 2rem; margin-bottom: 1.2rem; color: var(--gold); opacity: 0.7;
+    }
+
+    .teaching-card h3 {
+      font-family: 'IM Fell English', serif;
+      font-size: 1.4rem; margin-bottom: 0.8rem;
+    }
+
+    .teaching-card p {
+      color: var(--text-dim); font-size: 1rem; line-height: 1.65;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact { background: var(--bg2); max-width: 100%; }
+    #contact .inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 7rem 4rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
+    }
+
+    .contact-form {
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+
+    .form-field {
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+
+    .form-field label {
+      font-size: 0.7rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--text-dim);
+    }
+
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.85rem 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+      resize: none;
+      -webkit-appearance: none;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-field select option { background: var(--bg3); }
+
+    .form-field textarea { min-height: 120px; }
+
+    .contact-info h3 {
+      font-family: 'IM Fell English', serif;
+      font-size: 1.8rem; margin-bottom: 1.5rem;
+    }
+
+    .contact-info p {
+      color: var(--text-dim); font-size: 1.1rem; line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .contact-detail {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1rem; color: var(--text-dim);
+    }
+
+    .contact-detail-icon { color: var(--gold); font-size: 1.1rem; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    .footer-logo {
+      font-family: 'IM Fell English', serif;
+      font-size: 1.3rem; color: var(--gold); text-decoration: none;
+    }
+
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      color: var(--text-dim); text-decoration: none;
+      font-size: 0.75rem; letter-spacing: 0.15em;
+      text-transform: uppercase; transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 40vh; order: -1; }
+      .hero-content { padding: 4rem 1.5rem 3rem; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid,
+      #contact .inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .albums-grid { grid-template-columns: 1fr; }
+      .teaching-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .new-album { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Ankan</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#albums">Music</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" style="padding:0; max-width:100%;">
+    <div class="hero-visual">
+      <!-- Concentric arcs -->
+      <svg class="arcs" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="250" cy="250" r="220" stroke="#c9a84c" stroke-width="0.5"/>
+        <circle cx="250" cy="250" r="180" stroke="#c9a84c" stroke-width="0.5"/>
+        <circle cx="250" cy="250" r="140" stroke="#c9a84c" stroke-width="0.5"/>
+        <circle cx="250" cy="250" r="100" stroke="#c9a84c" stroke-width="0.5"/>
+        <line x1="30" y1="250" x2="470" y2="250" stroke="#c9a84c" stroke-width="0.4"/>
+        <line x1="250" y1="30" x2="250" y2="470" stroke="#c9a84c" stroke-width="0.4"/>
+        <line x1="95" y1="95" x2="405" y2="405" stroke="#c9a84c" stroke-width="0.3"/>
+        <line x1="405" y1="95" x2="95" y2="405" stroke="#c9a84c" stroke-width="0.3"/>
+      </svg>
+      <div class="portrait-ring"></div>
+      <div class="center-symbol">𝄞</div>
+      <div class="bengali-script">রবীন্দ্রসংগীত</div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Rabindrasangeet Artist &amp; Educator</div>
+      <h1 class="hero-name">
+        Ankan<em>Chakraborty</em>
+      </h1>
+      <p class="hero-tagline">
+        Carrying the timeless songs of Rabindranath Tagore across oceans, from Kolkata to North America.
+      </p>
+      <div class="hero-cta">
+        <a href="#albums" class="btn btn-primary">Listen Now</a>
+        <a href="#teaching" class="btn btn-outline">Learn with Me</a>
+      </div>
+      <div class="hero-scroll">
+        <span class="hero-scroll-line"></span>
+        <span>Scroll to explore</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">Biography</div>
+    <h2 class="section-title">A Voice Steeped<br><em>in Tradition</em></h2>
+    <div class="about-grid">
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Albums Released</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Years of Performance</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">2</div>
+          <div class="stat-label">Continents, One Voice</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>
+          Rooted in the living tradition of Rabindra Sangeet, Ankan brings the poetry and music of Nobel laureate Rabindranath Tagore to listeners across North America and beyond.
+        </p>
+        <p>
+          Trained in the classical Visva-Bharati style, Ankan blends scholarly depth with a performer's natural warmth — making these century-old songs feel urgently present. Based in Cumming, Georgia, he teaches students of all ages both in-person and online, building a new generation of Rabindrasangeet practitioners far from Tagore's own shores.
+        </p>
+        <p>
+          His recordings capture the meditative stillness, the monsoon longing, and the spiritual expansiveness that make Tagore's compositions utterly singular in the world's musical heritage.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ALBUMS -->
+  <div id="albums" style="background:var(--bg2);">
+    <section class="inner" style="padding:7rem 4rem; max-width:1200px; margin:0 auto;">
+      <div class="section-label">Discography</div>
+      <h2 class="section-title">Three Albums,<br><em>A Lifetime of Songs</em></h2>
+
+      <div class="albums-grid">
+        <!-- Album 1 -->
+        <div class="album-card">
+          <div class="album-cover album-cover-1"></div>
+          <div class="album-info-static">
+            <div class="album-year">2019</div>
+            <div class="album-title">আনন্দলোকে</div>
+          </div>
+          <div class="album-overlay">
+            <div class="album-year">2019</div>
+            <div class="album-title">Anandoloke</div>
+            <div class="album-tag">12 Tracks</div>
+          </div>
+        </div>
+        <!-- Album 2 -->
+        <div class="album-card">
+          <div class="album-cover album-cover-2"></div>
+          <div class="album-info-static">
+            <div class="album-year">2021</div>
+            <div class="album-title">আকাশ ভরা</div>
+          </div>
+          <div class="album-overlay">
+            <div class="album-year">2021</div>
+            <div class="album-title">Akash Bhora</div>
+            <div class="album-tag">10 Tracks</div>
+          </div>
+        </div>
+        <!-- Album 3 -->
+        <div class="album-card">
+          <div class="album-cover album-cover-3"></div>
+          <div class="album-info-static">
+            <div class="album-year">2023</div>
+            <div class="album-title">নীলাঞ্জন</div>
+          </div>
+          <div class="album-overlay">
+            <div class="album-year">2023</div>
+            <div class="album-title">Nilanjan</div>
+            <div class="album-tag">11 Tracks</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upcoming -->
+      <div class="new-album">
+        <div>
+          <div class="new-album-label">Coming 2025 · Fourth Album</div>
+          <div class="new-album-title">প্রাণের আলো · Praner Alo</div>
+        </div>
+        <div>
+          <p class="new-album-desc">
+            The fourth studio album is in progress — an intimate collection exploring Tagore's songs of longing and homecoming, recorded with acoustic simplicity.
+          </p>
+        </div>
+        <div>
+          <a href="#contact" class="btn btn-outline">Stay Updated</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TEACHING -->
+  <section id="teaching">
+    <div class="section-label">Music Education</div>
+    <h2 class="section-title">Learn Rabindrasangeet<br><em>With Ankan</em></h2>
+    <p style="color:var(--text-dim); font-size:1.15rem; max-width:600px; margin-bottom:1rem; line-height:1.75;">
+      Whether you are a complete beginner curious about Bengali music or an experienced vocalist deepening your Tagore repertoire, lessons are tailored to your pace and purpose.
+    </p>
+    <div class="teaching-grid">
+      <div class="teaching-card">
+        <div class="teaching-icon">🎵</div>
+        <h3>Online Lessons</h3>
+        <p>Live, one-on-one sessions via video call for students across North America and worldwide. Flexible scheduling around your timezone.</p>
+      </div>
+      <div class="teaching-card">
+        <div class="teaching-icon">🏡</div>
+        <h3>In-Person (Atlanta Area)</h3>
+        <p>In-person lessons available in and around Cumming, GA for local students who prefer face-to-face instruction in a welcoming home studio environment.</p>
+      </div>
+      <div class="teaching-card">
+        <div class="teaching-icon">📚</div>
+        <h3>All Ages & Levels</h3>
+        <p>From young beginners to adult learners, from those discovering Tagore to advanced students refining raag and taal — all are welcome.</p>
+      </div>
+      <div class="teaching-card">
+        <div class="teaching-icon">🌿</div>
+        <h3>Cultural & Linguistic Context</h3>
+        <p>Lessons go beyond notes — exploring the Bengali poetry, historical context, and emotional depth that make Rabindrasangeet unique among world music traditions.</p>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;">
+      <a href="#contact" class="btn btn-primary">Enquire About Lessons</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <div id="contact" style="background:var(--bg2);">
+    <div class="inner" style="max-width:1200px; margin:0 auto; padding:7rem 4rem; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start;">
+      <div class="contact-info">
+        <div class="section-label">Get in Touch</div>
+        <h2 class="section-title" style="font-size:2.2rem;">Let's Begin<br><em>the Conversation</em></h2>
+        <p>For lesson enquiries, performance bookings, collaborations, or any questions about Rabindrasangeet.</p>
+        <div class="contact-detail">
+          <span class="contact-detail-icon">✉</span>
+          <span>ankan@example.com</span>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-icon">📍</span>
+          <span>Cumming, Georgia · Teaching Worldwide Online</span>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-icon">🎵</span>
+          <span>Available on Spotify, Apple Music & YouTube</span>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="return false;">
+        <div class="form-field">
+          <label>Your Name</label>
+          <input type="text" placeholder="Name" />
+        </div>
+        <div class="form-field">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com" />
+        </div>
+        <div class="form-field">
+          <label>Enquiry Type</label>
+          <select>
+            <option>Lesson Enquiry</option>
+            <option>Performance / Booking</option>
+            <option>Collaboration</option>
+            <option>Album / Music</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Message</label>
+          <textarea placeholder="How can I help you?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="footer-logo">Ankan</a>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#albums">Music</a>
+      <a href="#teaching">Lessons</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <span style="font-size:0.75rem;">&copy; 2025 Ankan Chakraborty · Rabindrasangeet Artist</span>
+  </footer>
+
+</body>
+</html>
