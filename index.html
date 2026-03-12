@@ -166,7 +166,7 @@
   <!-- HERO -->
   <div class="hero" style="padding:0;">
     <div class="hero-portrait">
-      <img src="shrabanti-basu-profile.jpg" alt="Shrabanti Basu — Rabindrasangeet Artist" />
+      <img src="shrabanti-basu-profile.jpg" alt="Shrabanti Basu — Rabindrasangeet Artist" onerror="this.style.opacity='0'" />
     </div>
     <div class="hero-content">
       <div class="hero-eyebrow">Rabindrasangeet Artist · Atlanta, GA</div>
@@ -220,7 +220,10 @@
             <div class="album-year">2023 · Debut</div>
             <div class="album-title-bengali">এ পরবাসে</div>
             <div class="album-title-eng">E Porobase — "In This Foreign Land"</div>
-            <div class="album-tag">Rabindrasangeet</div>
+            <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;margin-top:0.7rem;">
+              <div class="album-tag">Rabindrasangeet</div>
+              <a href="https://www.youtube.com/watch?v=bt4K8eRW_0Q&list=PLFPlrpvyCjF7AzTxFn9Rse3AI4vfEcRGK" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.3rem;padding:0.18rem 0.65rem;background:#ff0000;color:#fff;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;font-family:sans-serif;">&#9654; YouTube</a>
+            </div>
           </div>
         </div>
         <div class="album-card">
@@ -229,7 +232,10 @@
             <div class="album-year">2024</div>
             <div class="album-title-bengali">নিদ্রাবিহীন</div>
             <div class="album-title-eng">Nidrabihin — "Sleepless"</div>
-            <div class="album-tag">Rabindrasangeet</div>
+            <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;margin-top:0.7rem;">
+              <div class="album-tag">Rabindrasangeet</div>
+              <a href="https://www.youtube.com/watch?v=ENmSPH2bztE&list=PLFPlrpvyCjF5HJXTaHYxiJpKTJNz2XMh3" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.3rem;padding:0.18rem 0.65rem;background:#ff0000;color:#fff;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;font-family:sans-serif;">&#9654; YouTube</a>
+            </div>
           </div>
         </div>
         <div class="album-card">
@@ -239,7 +245,10 @@
             <div class="album-year">2025 · Latest</div>
             <div class="album-title-bengali">গানের পরে গান</div>
             <div class="album-title-eng">Ganer Pore Gan — "Song after Song"</div>
-            <div class="album-tag">Rabindrasangeet</div>
+            <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;margin-top:0.7rem;">
+              <div class="album-tag">Rabindrasangeet</div>
+              <a href="https://www.youtube.com/watch?v=XolILakp0tU&list=PLFPlrpvyCjF6PVS5Pho25bFX0VVz31d_S" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.3rem;padding:0.18rem 0.65rem;background:#ff0000;color:#fff;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;font-family:sans-serif;">&#9654; YouTube</a>
+            </div>
           </div>
         </div>
       </div>
@@ -285,6 +294,30 @@
 
   <div class="divider"></div>
 
+  <!-- FEATURED SONG -->
+  <section id="featured" class="section">
+    <div class="section-label">Featured Song</div>
+    <h2 class="section-title">নব আনন্দে জাগো<br><em>Naba Anande Jago</em></h2>
+    <p style="color:var(--text-dim);font-size:1.1rem;font-style:italic;max-width:560px;line-height:1.75;margin-bottom:2rem;">
+      From the debut album <span style="color:var(--text);">এ পরবাসে</span> (2023) — one of Tagore's most luminous songs of awakening and joy.
+    </p>
+    <div style="position:relative;width:100%;max-width:760px;aspect-ratio:16/9;border:1px solid var(--border);overflow:hidden;">
+      <iframe
+        src="https://www.youtube.com/embed/YVbdqw0-vGM?list=PLFPlrpvyCjF7AzTxFn9Rse3AI4vfEcRGK"
+        title="নব আনন্দে জাগো — Shrabanti Basu"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="position:absolute;inset:0;width:100%;height:100%;">
+      </iframe>
+    </div>
+    <div style="margin-top:1.5rem;">
+      <a href="https://www.youtube.com/watch?v=YVbdqw0-vGM&list=PLFPlrpvyCjF7AzTxFn9Rse3AI4vfEcRGK&index=2" target="_blank" rel="noopener" class="btn btn-outline">Watch Full Playlist on YouTube</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- TEACHING -->
   <section id="teaching" class="section">
     <div class="section-label">Music Education</div>
@@ -309,7 +342,7 @@
           <div class="section-label">Get in Touch</div>
           <h2 class="section-title" style="font-size:2.1rem;">Let's Begin<br><em>the Conversation</em></h2>
           <p>For lesson enquiries, performance bookings, collaborations, or any questions about Rabindrasangeet — reach out anytime.</p>
-          <div class="contact-detail"><span class="ci-icon">✉</span><span>shrabanti@shrabanti.com</span></div>
+          <div class="contact-detail"><span class="ci-icon">✉</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87f4eff5e6e5e6e9f3eec7f4eff5e6e5e6e9f3eea9e4e8ea">[email&#160;protected]</a></span></div>
           <div class="contact-detail"><span class="ci-icon">📍</span><span>Atlanta, Georgia · Teaching Worldwide Online</span></div>
           <div class="contact-detail"><span class="ci-icon">🎵</span><span>Available on Spotify, Apple Music &amp; YouTube Music</span></div>
           <div class="contact-detail"><span class="ci-icon">🎬</span><span>Basu Home Studio · Atlanta, GA · 2023–2025</span></div>
@@ -333,9 +366,3 @@
     <a href="#" class="footer-logo">শ্রাবন্তী বসু · Shrabanti Basu</a>
     <div class="footer-links">
       <a href="#about">About</a><a href="#albums">Albums</a><a href="#teaching">Lessons</a><a href="#contact">Contact</a>
-    </div>
-    <span>&copy; 2025 Shrabanti Basu · Rabindrasangeet Artist · Atlanta, GA</span>
-  </footer>
-
-</body>
-</html>
